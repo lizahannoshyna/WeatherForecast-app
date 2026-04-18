@@ -1,0 +1,72 @@
+.searchWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 42rem; 
+}
+
+.inputGroup {
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 1rem; 
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(148, 163, 184, 0.6);
+  width: 1.25rem; 
+  height: 1.25rem; 
+  transition: all 0.3s;
+}
+
+.inputField:focus + .searchIcon,
+.inputGroup:focus-within .searchIcon {
+  color: white;
+}
+
+.inputField {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem; 
+  background-color: rgba(255, 255, 255, 0.1); 
+  backdrop-filter: blur(24px); 
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  border-radius: 1rem; 
+  color: white;
+  transition: all 0.3s;
+  outline: none;
+}
+
+.inputField::placeholder {
+  color: rgba(255, 255, 255, 0.4); 
+}
+
+.inputField:hover {
+  background-color: rgba(255, 255, 255, 0.15); 
+}
+
+.inputField:focus {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3); 
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.clearButton {
+  position: absolute;
+  right: 3.5rem; 
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.5); 
+  padding: 0.25rem; 
+  border-radius: 9999px;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.clearButton:hover {
+  color: white; 
+  background-color: rgba(255, 255, 255, 0.1); 
+}

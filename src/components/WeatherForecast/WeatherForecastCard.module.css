@@ -1,0 +1,145 @@
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  padding: 1.5rem;   
+  border-radius: 1rem; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #1f2937;
+  background: rgba(30, 41, 59, 0.05); 
+  border: 1px solid rgba(255, 255, 255, 0.6); 
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
+  
+  background: rgba(255, 255, 255, 0.4); 
+  backdrop-filter: blur(16px); 
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: #ff7e5f; 
+  box-shadow: 0 0 25px rgba(255, 126, 95, 0.3), 
+              0 15px 35px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.locationHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.75rem;
+  color: #4b5563; 
+  padding: 0 0.5rem;
+  font-weight: 600;
+}
+
+.time {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #111827;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.025em;
+}
+
+.hourlyBtn {
+  font-size: 0.75rem;
+  color: #ff7e5f; /* Оранжевий текст */
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 9999px;
+  padding: 0.375rem 1rem;
+  font-weight: 700;
+  border: 1px solid rgba(255, 126, 95, 0.2);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.hourlyBtn:hover {
+  background-color: #ff7e5f;
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 126, 95, 0.4);
+}
+
+.dateInfo {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 1.25rem;
+  font-weight: 500;
+}
+
+.weatherIcon {
+  width: 7rem;
+  height: 7rem;
+  margin: 1.5rem 0;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.08)); 
+}
+
+.temperature {
+  font-size: 3.75rem;
+  font-weight: 800;
+  color: #030712;
+  margin-bottom: 2.5rem;
+  letter-spacing: -0.05em;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: auto;
+  padding: 0 0.25rem;
+}
+
+.leftActions, .rightActions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.iconBtn {
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  color: #ff7e5f; 
+}
+
+.iconBtn:hover {
+  background: #ff7e5f;
+  color: white; 
+  transform: rotate(15deg);
+}
+
+.trashBtn:hover {
+  background: #ef4444;
+}
+
+.seeMoreBtn {
+  font-size: 0.875rem;
+  color: #ff7e5f;
+  font-weight: 700;
+  padding: 0.6rem 1.25rem;
+  background-color: white;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 126, 95, 0.1);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.seeMoreBtn:hover {
+  background-color: #ff7e5f;
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 126, 95, 0.3);
+}
