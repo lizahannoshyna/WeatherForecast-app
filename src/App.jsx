@@ -7,6 +7,7 @@ import WeatherForecast from "./components/WeatherForecast/WeatherForecast";
 import { getByCity } from "./services/weatherService";
 import News from "./components/News/News";
 import GallerySwiper from "./components/Gallery/GallerySwiper";
+import Footer from "./components/Footer/Footer";
 import "./App.css";
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
       <WeatherForecast weatherList={weatherList} />
       {/* <News/> */}
       <GallerySwiper />
+      <Footer/>
     </ThemeProvider>
   );
 }

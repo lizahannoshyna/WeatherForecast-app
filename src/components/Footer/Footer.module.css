@@ -1,0 +1,68 @@
+.footer {
+  background-color: #FFB36D;
+  padding: 48px 0;
+  margin-top: 80px;
+  color: #2D2D2D;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.logo h2 {
+  font-size: 36px;
+  font-weight: bold;
+  font-style: italic;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.logo span {
+  font-size: 24px;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.address p {
+  margin: 4px 0;
+  font-size: 14px;
+  font-weight: 300;
+  opacity: 0.9;
+}
+
+.socialList {
+  display: flex;
+  gap: 16px;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #2D2D2D;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.socialLink:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
