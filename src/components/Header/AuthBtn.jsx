@@ -1,21 +1,13 @@
 import React from "react";
-
+import css from "./AuthBtn.module.css"
 const AuthBtn = ({ isLoggedIn, onClick }) => {
   return (
-    <>
-      <button
-        onClick={onClick}
-        className={`
-        ${
-          isLoggedIn
-            ? "border-2 border-[#ffb422] text-[#ffb422] bg-transparent hover:bg-[#ffb422] hover:text-white"
-            : "bg-[#ffb422] text-white hover:bg-[#e5a31f] shadow-md hover:shadow-lg"
-        }
-      `}
-      >
-        {isLoggedIn ? "Log Out" : "Sign Up"}
-      </button>
-    </>
+    <button
+      onClick={onClick}
+      className={`${css.btn} ${isLoggedIn ? css.logOut : css.signUp}`}
+    >
+      {isLoggedIn ? "Log Out" : "Sign Up"}
+    </button>
   );
 };
 

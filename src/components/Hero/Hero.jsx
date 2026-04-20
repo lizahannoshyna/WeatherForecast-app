@@ -16,17 +16,27 @@ const Hero = ({ onSearch }) => {
   return (
     <section
       className={css.heroSection}
-      style={{ backgroundImage: `url(${heroBg})` }}
+      style={{ "--bg-url": `url(${heroBg})` }}
     >
       <Container>
-        <h1 className={css.heroTitle}>Weather dashboard</h1>
+        <h1 className={`${css.heroTitle} animate__animated animate__fadeIn`}>
+          Weather dashboard
+        </h1>
         <div className={css.heroContent}>
-          <p>
-            Create your personal list of favorite cities and always be aware of
-            the weather.
+          <p
+            className={`${css.leftText} animate__animated animate__bounceInLeft`}
+          >
+            Create your personal list of <br /> favorite cities and always be{" "}
+            <br /> aware of the weather.
           </p>
-          <div className={css.divider}></div>
-          <div className={css.date}>
+
+          <div
+            className={`${css.divider} animate__animated animate__bounceInUp`}
+          ></div>
+
+          <div
+            className={`${css.date} animate__animated animate__bounceInRight`}
+          >
             <p className={css.monthYear}>{monthYear}</p>
             <p className={css.dayInfo}>
               {weekday}, {dayNumber}

@@ -1,25 +1,29 @@
-import React from "react";
-import WeatherForecastCard from "./WeatherForecastCard";
-import Container from "../Container";
-import css from "./WeatherForecast.module.css";
+import React from 'react';
+import WeatherForecastCard from './WeatherForecastCard';
+import styles from './WeatherForecast.module.css';
 
-const WeatherForecast = ({ weatherList }) => {
-  if (!weatherList || weatherList.length === 0) {
-    return (
-      <div className="text-center text-white/70 py-10">
-        Search for a city to see the weather.
-      </div>
-    );
-  }
-
+const WeatherForecast = ({ 
+  weatherList, 
+  onSeeMore, 
+  onHourlyClick, 
+  onDelete, 
+  onFavorite, 
+  onRefresh 
+}) => {
   return (
-    <Container>
-      <div className={css.gridContainer}>
-        {weatherList.map((cityData) => (
-          <WeatherForecastCard key={cityData.id} data={cityData} />
-        ))}
-      </div>
-    </Container>
+    <section className={styles.list}>
+      {weatherList && weatherList.map((data) => (
+        <WeatherForecastCard
+          key={data.id}
+          data={data}
+          onSeeMore={onSeeMore}
+          onHourlyClick={onHourlyClick}
+          onDelete={onDelete}
+          onFavorite={onFavorite}
+          onRefresh={onRefresh}
+        />
+      ))}
+    </section>
   );
 };
 

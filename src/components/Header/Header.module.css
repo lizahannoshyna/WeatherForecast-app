@@ -1,24 +1,42 @@
 .headerContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 0;
+  width: 100%;
 }
 
-.nav {
-  padding-left: 0; 
+.contentWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 0;
+}
+
+.logoWrp {
+  display: flex;
+  align-items: center;
 }
 
 .menuList {
   display: flex;
   list-style: none;
-  gap: 0px;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
 }
 
 .menuLink {
   text-decoration: none;
-  color: var(--text); 
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #4b5563;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.menuLink:hover {
+  color: #f26522;
+  border-bottom: 2px solid #f26522;
 }
 
 .SignIn {
@@ -27,4 +45,10 @@
   padding: 8px 20px;
   border: none;
   cursor: pointer;
+}
+
+.authSection {
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }

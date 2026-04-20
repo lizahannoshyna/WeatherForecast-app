@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Search, X, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import css from "./SearchBar.module.css";
 
 const SearchBar = ({ onSearch }) => {
@@ -15,18 +15,18 @@ const SearchBar = ({ onSearch }) => {
 
   return (
     <div className={css.searchWrapper}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={css.searchForm}>
         <div className={css.inputGroup}>
-          <Search className={css.searchIcon} />
+          <MapPin className={css.pinIcon} size={20} />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search for any city..."
+            placeholder="Check the sky in Tokyo, London..."
             className={css.inputField}
           />
-          <button type="submit" style={{ display: "none" }}>
-            Search
+          <button type="submit" className={css.exploreBtn}>
+            Explore
           </button>
         </div>
       </form>

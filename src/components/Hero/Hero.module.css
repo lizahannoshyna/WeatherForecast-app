@@ -1,75 +1,65 @@
 .heroSection {
   width: 100%;
   min-height: 80vh;
-
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)),
-    url("../../assets/img/hero/hero-bg.png");
+    linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), var(--bg-url);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: #ffffff; 
+  color: #ffffff;
 }
 
 .heroTitle {
-  font-size: 48px;
-  font-weight: 500;
+  font-size: 72px;
+  font-weight: 700;
   margin: 0;
-  color: aliceblue;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  color: #ffffff;
   padding-bottom: 80px;
 }
 
 .heroContent {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 40px;
-  max-width: 800px;
   align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  width: 100%;
+  margin-left: 7%;
 }
 
-.heroContent p {
-  font-size: 18px;
-  line-height: 1.4;
-  max-width: 300px;
-  text-align: right; 
-  margin-bottom: 80px;
+.leftText {
+  flex: 1;
+  text-align: right;
+  font-size: 24px;
+  line-height: 1.2;
+  margin: 0;
 }
 
 .divider {
   width: 2px;
-  height: 90px;
-  background-color: rgba(255, 255, 255, 0.6);
+  height: 100px;
+  background-color: rgba(255, 255, 255, 1);
+  flex-shrink: 0;
 }
 
 .date {
-  text-align: left;}
+  flex: 1;
+  text-align: left;
+}
 
 .monthYear {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 500;
-  margin-bottom: 4px !important;
+  margin: 0 0 8px 0;
 }
 
 .dayInfo {
-  font-size: 18px;
+  font-size: 24px;
   opacity: 0.9;
-}
-
-.dayInfo sup {
-  font-size: 12px;
-}
-
-.SearchBarSeaction {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
+  margin: 0;
 }
