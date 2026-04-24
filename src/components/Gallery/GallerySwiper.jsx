@@ -4,13 +4,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Container from "../Container";
 
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 
-import { Navigation, Pagination, EffectCoverflow } from "swiper/modules";
+import { Pagination, EffectCoverflow, Autoplay } from "swiper/modules";
 
-function GallerySwiper() {
+function GallerySwiper({ weatherList = [] }) {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -21,7 +20,7 @@ function GallerySwiper() {
         const response = await axios.get("https://pixabay.com/api/", {
           params: {
             key: API_KEY,
-            q: "nature weather forest lakes landscapes  animals flowers beautiful gorgeous  night happiness",
+            q: "forest sun rays warm light cinematic soft light forest aesthetic calm mountain sky sea city ",
             image_type: "photo",
             orientation: "horizontal",
             per_page: 12,
@@ -54,11 +53,16 @@ function GallerySwiper() {
         </div>
 
         <Swiper
-          dir="rtl"
           effect={"coverflow"}
           grabCursor={true}
           centeredSlides={true}
           slidesPerView={"auto"}
+          loop={true}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }}
           coverflowEffect={{
             rotate: 0,
             stretch: 0,
@@ -67,8 +71,8 @@ function GallerySwiper() {
             slideShadows: false,
           }}
           pagination={{ clickable: true }}
-          navigation={true}
-          modules={[EffectCoverflow, Pagination, Navigation]}
+          navigation={false}
+          modules={[EffectCoverflow, Pagination, Autoplay]}
           className="pb-14"
         >
           {images.map((image) => (
@@ -89,6 +93,7 @@ function GallerySwiper() {
             </SwiperSlide>
           ))}
         </Swiper>
+
       </Container>
     </section>
   );

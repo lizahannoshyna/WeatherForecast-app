@@ -2,100 +2,111 @@
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
   border-radius: 40px;
-  padding: 20px;
+  padding: 25px;
   width: 100%;
-  max-width: 350px;
+  max-width: 320px;
   color: #1a1a1a;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .card:hover {
   background: linear-gradient(135deg, #ffb422 0%, #ff9a44 100%);
   color: #ffffff;
-  transform: translateY(-5px);
+  transform: translateY(-8px);
   box-shadow: 0 15px 35px rgba(255, 154, 68, 0.3);
 }
 
-.card:hover .divider {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.card:hover .countryName,
-.card:hover .fullDate {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.card:hover .iconBtn,
-.card:hover .trashBtn,
-.card:hover .seeMoreBtn {
+.card:hover .time,
+.card:hover .temperature,
+.card:hover .cityName,
+.card:hover .dateInfo,
+.card:hover .countryName {
   color: #ffffff;
-}
-
-.card:hover .iconBtn {
-  background: rgba(255, 255, 255, 0.2);
 }
 
 .locationHeader {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  font-size: 0.75rem;
-  color: #4b5563;
-  padding: 0 0.5rem;
-  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.cityName {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.countryName {
+  font-size: 12px;
+  text-transform: uppercase;
+  opacity: 0.6;
 }
 
 .time {
   font-size: 2.25rem;
   font-weight: 800;
   color: #111827;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.025em;
+  margin: 10px 0;
 }
 
-.hourlyBtn {
-  font-size: 0.75rem;
+.forecastButtons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.smallBtn {
+  font-size: 0.7rem;
   color: #ff7e5f;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: white;
   border-radius: 9999px;
-  padding: 0.375rem 1rem;
+  padding: 5px 12px;
   font-weight: 700;
   border: 1px solid rgba(255, 126, 95, 0.2);
   cursor: pointer;
   transition: all 0.2s;
 }
 
-.hourlyBtn:hover {
-  background-color: #ff7e5f;
+.card:hover .smallBtn {
+  background-color: rgba(255, 255, 255, 0.2);
   color: white;
-  box-shadow: 0 4px 12px rgba(255, 126, 95, 0.4);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .dateInfo {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: #6b7280;
-  margin-top: 1.25rem;
-  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.separator {
+  margin: 0 8px;
+  opacity: 0.4;
+}
+
+.mainDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .weatherIcon {
-  width: 7rem;
-  height: 7rem;
-  margin: 1.5rem 0;
+  width: 100px;
+  height: 100px;
   filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.08));
 }
 
 .temperature {
-  font-size: 3.75rem;
+  font-size: 3.5rem;
   font-weight: 800;
   color: #030712;
-  margin-bottom: 2.5rem;
-  letter-spacing: -0.05em;
+  letter-spacing: -2px;
 }
 
 .actions {
@@ -104,132 +115,65 @@
   align-items: center;
   width: 100%;
   margin-top: auto;
-  padding: 0 0.25rem;
 }
 
-.leftActions,
-.rightActions {
+.leftActions {
   display: flex;
-  gap: 0.75rem;
+  gap: 10px;
 }
 
 .iconBtn {
-  padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.5);
+  padding: 8px;
+  background: rgba(255, 126, 95, 0.1);
   border-radius: 50%;
   border: none;
   cursor: pointer;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
   color: #ff7e5f;
+  transition: all 0.3s;
+}
+
+.card:hover .iconBtn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
 }
 
 .iconBtn:hover {
+  transform: rotate(15deg) scale(1.1);
   background: #ff7e5f;
   color: white;
-  transform: rotate(15deg);
-}
-
-.trashBtn:hover {
-  background: #ef4444;
 }
 
 .seeMoreBtn {
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   color: #ff7e5f;
   font-weight: 700;
-  padding: 0.6rem 1.25rem;
+  padding: 8px 15px;
   background-color: white;
-  border-radius: 1rem;
+  border-radius: 12px;
   border: 1px solid rgba(255, 126, 95, 0.1);
   cursor: pointer;
   transition: all 0.3s;
 }
 
-.seeMoreBtn:hover {
-  background-color: #ff7e5f;
+.card:hover .seeMoreBtn {
+  background-color: white;
+  color: #ff9a44;
+}
+
+.deleteBtn {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  padding: 8px;
+  transition: transform 0.2s;
+}
+
+.card:hover .deleteBtn {
   color: white;
-  box-shadow: 0 4px 15px rgba(255, 126, 95, 0.3);
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 20px;
-}
-
-.cityName {
-  font-size: 26px;
-  font-weight: 700;
-  margin: 0;
-}
-.countryName {
-  font-size: 12px;
-  text-transform: uppercase;
-  opacity: 0.6;
-}
-
-.mainInfo {
-  text-align: center;
-  margin: 15px 0;
-}
-.tempBlock {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-}
-
-.temperature {
-  font-size: 80px;
-  font-weight: 800;
-  margin: 0;
-}
-
-.weatherIcon {
-  width: 90px;
-  height: 90px;
-}
-.time {
-  font-size: 32px;
-  font-weight: 600;
-  margin: 5px 0;
-}
-
-.divider {
-  height: 1px;
-  background: rgba(0, 0, 0, 0.1);
-  margin: 20px 0;
-  transition: background 0.3s;
-}
-
-.footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-.seeMoreBtn {
-  text-decoration: underline;
-  background: none;
-  border: none;
-  font-weight: 700;
-  cursor: pointer;
-}
-.trashBtn {
-  background: none;
-  border: none;
-  color: #ff4d4d;
-  cursor: pointer;
-}
-
-.chartWrapper {
-  width: 100%;
-  height: 150px;
-  margin: 10px 0;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
+.deleteBtn:hover {
+  transform: scale(1.2);
 }

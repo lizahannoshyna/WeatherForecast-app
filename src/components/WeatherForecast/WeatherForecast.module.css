@@ -1,4 +1,4 @@
-.gridContainer {
+.weatherWrp {
   padding-top: 56px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));

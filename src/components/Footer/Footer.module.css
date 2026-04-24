@@ -1,8 +1,8 @@
 .footer {
-  background-color: #FFB36D;
-  padding: 48px 0;
+  background: linear-gradient(135deg, #ffb36d 0%, #ff8e42 100%);
+  padding: 60px 0;
   margin-top: 80px;
-  color: #2D2D2D;
+  color: #ffffff;
 }
 
 .grid {
@@ -10,6 +10,9 @@
   grid-template-columns: 1fr;
   gap: 40px;
   align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 @media (min-width: 768px) {
@@ -18,51 +21,55 @@
   }
 }
 
-.logo h2 {
-  font-size: 36px;
-  font-weight: bold;
-  font-style: italic;
-  line-height: 1.1;
-  margin: 0;
-}
-
-.logo span {
-  font-size: 24px;
-  font-weight: 500;
-  font-style: normal;
-}
-
 .sectionTitle {
   font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #ffffff;
+  position: relative;
+}
+
+.sectionTitle::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.4);
+  margin-top: 8px;
+  border-radius: 2px;
 }
 
 .address p {
-  margin: 4px 0;
-  font-size: 14px;
-  font-weight: 300;
-  opacity: 0.9;
+  margin: 8px 0;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .socialList {
   display: flex;
   gap: 16px;
+  margin-top: 10px;
 }
 
 .socialLink {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
   border-radius: 50%;
-  color: #2D2D2D;
-  transition: background-color 0.3s ease;
+  color: #ffffff;
+  transition: all 0.3s ease;
   text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .socialLink:hover {
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: #ffffff;
+  color: #ff8e42;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
