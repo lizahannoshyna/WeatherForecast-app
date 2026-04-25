@@ -2,20 +2,30 @@ import React, { useState, useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme";
 import { getByCity } from "./services/weatherService";
-import "./App.css";
+import { useAuth } from "./context/AuthContext";
 import { toast, ToastContainer } from "react-toastify";
+
+import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 
+import SignUpModal from "./components/SignUpModal/SignUpModal";
 import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
 import WeatherForecast from "./components/WeatherForecast/WeatherForecast";
 import WeatherForecastStats from "./components/WeatherForecastStats/WeatherForecastStats";
+import News from "./components/News/News";
 import GallerySwiper from "./components/Gallery/GallerySwiper";
 import HourlyForecast from "./components/HourlyForecast/HourlyForecast";
 import WeeklyForecast from "./components/WeeklyForecast/WeeklyForecast";
 import Footer from "./components/Footer/Footer";
 
 function App() {
+  const [activeCity, setActiveCity] = useState(() => {
+    return localStorage.getItem("active_city_name") || null;
+  });
+  const [cityPhotos, setCityPhotos] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const [weatherList, setWeatherList] = useState(() => {
     const saved = localStorage.getItem("weather_app_cards");
     return saved ? JSON.parse(saved) : [];
@@ -26,8 +36,7 @@ function App() {
     return saved ? JSON.parse(saved) : [];
   });
 
-  const [loading, setLoading] = useState(false);
-
+  const { user, openModal } = useAuth();
   const [selectedStats, setSelectedStats] = useState(null);
   const [selectedHourly, setSelectedHourly] = useState(null);
   const [selectedWeekly, setSelectedWeekly] = useState(null);
@@ -39,6 +48,39 @@ function App() {
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
+
+  useEffect(() => {
+    if (activeCity) {
+      localStorage.setItem("active_city_name", activeCity);
+    }
+  }, [activeCity]);
+
+  useEffect(() => {
+    const fetchCityPhotos = async () => {
+      const query = activeCity || "nature weather city people travel happiness";
+      const PIXABAY_KEY = import.meta.env.VITE_PIXABAY_API_KEY;
+
+      if (!PIXABAY_KEY) return;
+
+      try {
+        const response = await fetch(
+          `https://pixabay.com/api/?key=${PIXABAY_KEY}&q=${encodeURIComponent(query)}&image_type=photo&per_page=20`,
+        );
+        const data = await response.json();
+
+        const formattedPhotos = data.hits.map((img) => ({
+          id: img.id,
+          src: img.webformatURL,
+        }));
+
+        setCityPhotos(formattedPhotos);
+      } catch (error) {
+        console.error("Error fetching Pixabay photos:", error);
+      }
+    };
+
+    fetchCityPhotos();
+  }, [activeCity]);
 
   const handleSearch = async (city) => {
     if (!city.trim() || city.trim().length < 2) {
@@ -80,50 +122,14 @@ function App() {
     }
   };
 
-  const handleFavorite = (id) => {
-    const isFav = favorites.includes(id);
-
-    if (isFav) {
-      toast.info("Видалено з обраного");
-    } else {
-      toast.success("Додано в обране! ❤️");
+  const handleSeeMore = (cityData) => {
+    if (!user) {
+      openModal();
+      return;
     }
 
-    setFavorites((prev) =>
-      isFav ? prev.filter((favId) => favId !== id) : [...prev, id],
-    );
-  };
-
-  const handleRefresh = async (city) => {
-    const index = weatherList.findIndex((w) => w.name === city);
-    if (index === -1) return;
-
-    try {
-      toast.info(`Оновлення ${city}...`);
-      const updatedCurrent = await getByCity(city);
-      setWeatherList((prev) => {
-        const newList = [...prev];
-        newList[index] = { ...newList[index], ...updatedCurrent };
-        return newList;
-      });
-      toast.success("Дані оновлено!");
-    } catch (error) {
-      toast.error("Не вдалось оновити дані");
-    }
-  };
-
-  const handleDelete = (id) => {
-    setWeatherList((prev) => prev.filter((item) => item.id !== id));
-
-    if (selectedStats?.id === id) setSelectedStats(null);
-    if (selectedHourly?.id === id) setSelectedHourly(null);
-    if (selectedWeekly?.id === id) setSelectedWeekly(null);
-
-    toast.error("Картку видалено");
-  };
-
-  const handleSeeMore = (data) => {
-    setSelectedStats(data);
+    setActiveCity(cityData.name);
+    setSelectedStats(cityData);
     scrollToDetail();
   };
 
@@ -136,17 +142,57 @@ function App() {
     scrollToDetail();
   };
 
+  const handleLogout = () => {
+    setActiveCity(null);
+    setSelectedStats(null);
+    localStorage.removeItem("active_city_name");
+  };
+
+  const handleDelete = (id) => {
+    setWeatherList((prev) => prev.filter((item) => item.id !== id));
+    toast.error("Картку видалено");
+  };
+
+  const handleFavorite = (id) => {
+    if (!user) {
+      openModal();
+      return;
+    }
+    const isFav = favorites.includes(id);
+    setFavorites((prev) =>
+      isFav ? prev.filter((favId) => favId !== id) : [...prev, id],
+    );
+    isFav
+      ? toast.info("Видалено з обраного")
+      : toast.success("Додано в обране! ❤️");
+  };
+
+  const handleRefresh = async (city) => {
+    try {
+      const updatedCurrent = await getByCity(city);
+      setWeatherList((prev) =>
+        prev.map((w) => (w.name === city ? { ...w, ...updatedCurrent } : w)),
+      );
+      toast.success("Дані оновлено!");
+    } catch (error) {
+      toast.error("Не вдалось оновити дані");
+    }
+  };
+
   const scrollToDetail = () => {
     setTimeout(() => {
       window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-    }, 200);
+    }, 300);
   };
 
   return (
     <ThemeProvider theme={theme}>
       <ToastContainer position="top-right" autoClose={3000} theme="colored" />
 
-      <Header />
+      <SignUpModal />
+
+      <Header onOpenAuth={openModal} />
+
       <Hero onSearch={handleSearch} />
 
       {loading && <div className="loader-overlay">⏳ Завантаження...</div>}
@@ -155,19 +201,21 @@ function App() {
         weatherList={weatherList}
         favorites={favorites}
         onSeeMore={handleSeeMore}
-        onHourlyClick={(data, mode) => handleForecastClick(data, mode)}
+        onHourlyClick={handleForecastClick}
         onDelete={handleDelete}
         onFavorite={handleFavorite}
         onRefresh={handleRefresh}
       />
 
       {selectedStats && (
-        <div className="detail-section">
-          <div className="container">
+        <div className="container">
+          <div className="detail-section">
+            <h2 className="section-title">Stats for {selectedStats.name}</h2>
             <WeatherForecastStats weatherData={selectedStats} />
             <button
               className="close-btn"
               onClick={() => setSelectedStats(null)}
+              style={{ marginTop: "20px" }}
             >
               Close Stats
             </button>
@@ -175,9 +223,9 @@ function App() {
         </div>
       )}
 
-      {selectedHourly && (
-        <div className="detail-section">
-          <div className="container">
+      <div className="container">
+        {selectedHourly && (
+          <div className="detail-section">
             <h2 className="section-title">
               Hourly Forecast for {selectedHourly.name}
             </h2>
@@ -186,15 +234,13 @@ function App() {
               className="close-btn"
               onClick={() => setSelectedHourly(null)}
             >
-              Close Hourly
+              Close
             </button>
           </div>
-        </div>
-      )}
+        )}
 
-      {selectedWeekly && (
-        <div className="detail-section">
-          <div className="container">
+        {selectedWeekly && (
+          <div className="detail-section">
             <h2 className="section-title">
               Weekly Outlook for {selectedWeekly.name}
             </h2>
@@ -203,13 +249,16 @@ function App() {
               className="close-btn"
               onClick={() => setSelectedWeekly(null)}
             >
-              Close Weekly
+              Close
             </button>
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
-      <GallerySwiper weatherList={weatherList} />
+      <News city={activeCity} />
+
+      <GallerySwiper photos={cityPhotos} />
+
       <Footer />
     </ThemeProvider>
   );

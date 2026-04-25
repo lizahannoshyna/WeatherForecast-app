@@ -3,39 +3,51 @@ import axios from "axios";
 import Container from "../Container";
 import NewsArticle from './NewsArticle';
 
-const News = () => {
+
+
+const News = ({ city }) => { 
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         const fetchNews = async () => {
+            setLoading(true);
             try {
+                const searchQuery = city ? `${city} news` : 'pets OR dogs OR cats';
+
                 const response = await axios.get('https://newsapi.org/v2/everything', {
                     params: {
-                        q: 'pets OR dogs OR cats',
-                        pageSize: 4,
+                        q: searchQuery,
+                        pageSize: 20,
+                        language: 'en', 
                         apiKey: import.meta.env.VITE_NEWS_API_KEY
                     }
                 });
-                setArticles(response.data.articles)
+                setArticles(response.data.articles);
             } catch (error) {
-                console.error("Error in Axios", error)
+                console.error("Error in Axios", error);
             } finally {
                 setLoading(false);
             }
-        }
-        fetchNews();
-    }, [])
+        };
 
-    if (loading) return <p>Завантаження...</p>
+        fetchNews();
+    }, [city]); 
 
     return (
         <section className="py-12">
             <Container>
-                <h3 className="text-2xl font-semibold mb-8">Interacting with our pets</h3>
-                <NewsArticle items={articles} />
+                <h3 className="text-2xl font-semibold mb-8">
+                    {city ? `Latest news in ${city}` : "Interacting with our pets"}
+                </h3>
+                {loading ? (
+                    <p>Loading news...</p>
+                ) : (
+                    <NewsArticle items={articles} />
+                )}
             </Container>
         </section>
-    )
+    );
 };
 
 export default News;

@@ -1,44 +1,50 @@
-.mainTitle {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #1a202c;
-  margin-bottom: 25px;
-}
-
 .tableHeader {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  color: #a0aec0;
+  padding: 15px 20px;
+  background: #f8fafc;
+  border-radius: 12px 12px 0 0;
   border-bottom: 1px solid #e2e8f0;
 }
 
-.headDay,
-.headCondition,
-.headHumidity,
-.headTemp {
-  flex: 1;
-}
-
-.headTemp {
-  text-align: right;
+.headDay {
+  flex: 1.5;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #a0aec0;
 }
 
 .headCondition {
-  display: flex;
-  justify-content: center;
+  flex: 1;
+  text-align: center;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #a0aec0;
 }
 
 .headHumidity {
+  flex: 1;
   text-align: center;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #a0aec0;
 }
 
-.loader {
-  text-align: center;
-  color: #888;
-  padding: 20px;
+.headTemp {
+  flex: 2;
+  text-align: right;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #a0aec0;
+}
+
+@media (max-width: 640px) {
+  .headHumidity {
+    display: none;
+  }
 }

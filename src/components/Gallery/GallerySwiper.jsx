@@ -1,102 +1,46 @@
-import React, { useRef, useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Container from "../Container";
+import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/effect-coverflow";
 
-import { Pagination, EffectCoverflow, Autoplay } from "swiper/modules";
+import styles from "./GallerySwiper.module.css";
 
-function GallerySwiper({ weatherList = [] }) {
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const API_KEY = import.meta.env.VITE_PIXABAY_API_KEY;
-        const response = await axios.get("https://pixabay.com/api/", {
-          params: {
-            key: API_KEY,
-            q: "forest sun rays warm light cinematic soft light forest aesthetic calm mountain sky sea city ",
-            image_type: "photo",
-            orientation: "horizontal",
-            per_page: 12,
-            safesearch: true,
-          },
-        });
-        setImages(response.data.hits);
-      } catch (error) {
-        console.error("Error loading from Pixabay:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchImages();
-  }, []);
-
-  if (loading)
-    return (
-      <div className="text-center py-20 font-light">
-        Looking for the best landscapes...
-      </div>
-    );
+const GallerySwiper = ({ photos = [] }) => {
+  if (photos.length === 0) return null;
 
   return (
-    <section className="">
-      <Container>
-        <div className="">
-          <h2 className="">Beautiful nature</h2>
-        </div>
-
-        <Swiper
-          effect={"coverflow"}
-          grabCursor={true}
-          centeredSlides={true}
-          slidesPerView={"auto"}
-          loop={true}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          }}
-          coverflowEffect={{
-            rotate: 0,
-            stretch: 0,
-            depth: 100,
-            modifier: 2,
-            slideShadows: false,
-          }}
-          pagination={{ clickable: true }}
-          navigation={false}
-          modules={[EffectCoverflow, Pagination, Autoplay]}
-          className="pb-14"
-        >
-          {images.map((image) => (
-            <SwiperSlide key={image.id} style={{ width: "auto" }}>
-              <div className="relative overflow-hidden rounded-[2rem] shadow-sm transition-transform duration-500 hover:scale-[1.02]">
-                <img
-                  src={image.largeImageURL}
-                  alt={image.tags}
-                  className="h-[300px] md:h-[450px] w-auto object-cover"
-                />
-
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
-                  <p className="text-white text-sm font-light backdrop-blur-md bg-white/10 py-2 px-4 rounded-full">
-                    {image.tags.split(",")[0]}
-                  </p>
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-
-      </Container>
-    </section>
+    <div className={styles.galleryWrapper}>
+      <Swiper
+        modules={[Autoplay]}
+        spaceBetween={15}
+        slidesPerView={1}
+        loop={photos.length > 2}
+        centeredSlides={true}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        breakpoints={{
+          640: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        }}
+        className={styles.mySwiper}
+      >
+        {photos.map((photo, index) => (
+          <SwiperSlide key={photo.id || index}>
+            <div className={styles.slideInner}>
+              <img
+                src={photo.src || photo.webformatURL || photo.urls?.regular}
+                alt="City gallery"
+                className={styles.galleryImage}
+              />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
-}
+};
 
 export default GallerySwiper;

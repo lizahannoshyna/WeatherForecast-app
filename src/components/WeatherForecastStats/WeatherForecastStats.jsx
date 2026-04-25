@@ -1,11 +1,11 @@
 import React from "react";
 import {
   Thermometer,
-  Droplets, // Замінив CloudRain на Droplets для Humidity
+  Droplets, 
   Wind,
   Eye,
   Gauge,
-  ArrowUpDown, // Замінив ArrowUpCircle на ArrowUpDown для Min/Max
+  ArrowUpDown, 
 } from "lucide-react";
 import css from "./WeatherForecastStats.module.css";
 import Container from "../Container";

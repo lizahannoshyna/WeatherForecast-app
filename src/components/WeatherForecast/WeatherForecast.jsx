@@ -1,6 +1,6 @@
 import React from "react";
 import WeatherForecastCard from "./WeatherForecastCard";
-import Container from "../Container"
+import Container from "../Container";
 import styles from "./WeatherForecast.module.css";
 
 const WeatherForecast = ({

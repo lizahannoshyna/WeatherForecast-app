@@ -1,26 +1,29 @@
 .statsSection {
   padding: 40px 0;
+  width: 100%;
 }
 
 .statsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
   gap: 20px;
-  justify-items: center;
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .statCard {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   border-radius: 40px;
-  padding: 30px 20px;
-  width: 100%;
-  max-width: 220px;
+  padding: 30px 10px;
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-  transition: transform 0.3s ease;
 }
 
 .statCard:hover {
@@ -35,36 +38,68 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 15px;
+  flex-shrink: 0;
 }
 
-/* Кольори для іконок як на скріні */
-.orange { background: #fff1eb; color: #ff8e53; }
-.yellow { background: #fef9eb; color: #b08d32; }
-.blue   { background: #eef7ff; color: #2171b5; }
-.red    { background: #fff0ed; color: #ff6b4a; }
-.indigo { background: #f0f3ff; color: #4a6cff; }
-.gold   { background: #fff9e6; color: #d4a017; }
+.orange {
+  background: #fff1eb;
+  color: #ff8e53;
+}
+.yellow {
+  background: #fef9eb;
+  color: #b08d32;
+}
+.blue {
+  background: #eef7ff;
+  color: #2171b5;
+}
+.red {
+  background: #fff0ed;
+  color: #ff6b4a;
+}
+.indigo {
+  background: #f0f3ff;
+  color: #4a6cff;
+}
+.gold {
+  background: #fff9e6;
+  color: #d4a017;
+}
 
 .statTitle {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
   color: #8a7b75;
   letter-spacing: 1px;
   margin: 0 0 10px 0;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .statValue {
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 700;
   color: #1a1a1a;
   margin: 0;
+  text-align: center;
+  white-space: nowrap;
 }
 
-/* Для підпису hPa або km робимо шрифт трохи меншим (опціонально) */
-.statValue span {
-  font-size: 16px;
-  font-weight: 600;
-  color: #666;
-  margin-left: 4px;
+@media (max-width: 1024px) {
+  .statsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
 }

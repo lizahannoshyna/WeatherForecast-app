@@ -2,9 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 20px;
-  margin-bottom: 10px;
-  border-radius: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #f1f5f9; 
   transition: background 0.2s;
 }
 
@@ -12,60 +11,54 @@
   background-color: rgba(237, 242, 247, 0.5);
 }
 
-.dateSide,
-.conditionSide,
-.humiditySide,
-.tempSide {
-  flex: 1;
-}
-
 .dateSide {
+  flex: 1.5;
   font-weight: 500;
   color: #2d3748;
 }
 
 .conditionSide {
+  flex: 1;
   display: flex;
-  align-items: center;
   justify-content: center; 
 }
 
-.weatherIcon {
-  width: 35px;
-  height: 35px;
-  margin-right: 10px;
-}
-
-.weatherDesc {
-  color: #4a5568;
-  text-transform: capitalize;
-}
-
 .humiditySide {
-  text-align: center;
+  flex: 1;
+  text-align: center; 
   color: #718096;
   font-weight: 500;
 }
 
 .tempSide {
-  text-align: right;
+  flex: 2; 
   display: flex;
-  justify-content: flex-end;
-  align-items: baseline;
+  flex-direction: column; 
+  align-items: flex-end;
+  text-align: right;
+}
+
+.weatherIcon {
+  width: 45px;
+  height: 45px;
 }
 
 .tempMain {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: #1a202c;
 }
 
-.tempSeparator {
-  color: #e2e8f0;
-  margin: 0 3px;
+.weatherDesc {
+  color: #a0aec0;
+  font-size: 0.8rem;
+  text-transform: capitalize;
 }
 
-.tempSub {
-  color: #a0aec0;
-  font-size: 0.9rem;
+@media (max-width: 640px) {
+  .humiditySide {
+    display: none;
+  }
+  .dateSide { flex: 2; }
+  .tempSide { flex: 2; }
 }

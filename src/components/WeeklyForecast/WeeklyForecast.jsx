@@ -12,12 +12,22 @@ const WeeklyForecast = ({ data }) => {
 
   return (
     <Container>
-      <div className={styles.container}>
-        <h3 className={styles.title}>Weekly forecast</h3>
-        <div className={styles.list}>
-          {dailyData.map((day) => (
-            <WeeklyForecastCard key={day.dt} dayData={day} />
-          ))}
+      <div className={styles.forecastWrapper}>
+        <h3 className={styles.mainTitle}>Weekly forecast</h3>
+
+        <div className={styles.tableContainer}>
+          <div className={styles.tableHeader}>
+            <span className={styles.headDay}>Day</span>
+            <span className={styles.headCondition}>Condition</span>
+            <span className={styles.headHumidity}>Hum.</span>
+            <span className={styles.headTemp}>Temp</span>
+          </div>
+
+          <div className={styles.list}>
+            {dailyData.map((day) => (
+              <WeeklyForecastCard key={day.dt} dayData={day} />
+            ))}
+          </div>
         </div>
       </div>
     </Container>

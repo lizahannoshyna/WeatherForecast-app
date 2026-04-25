@@ -25,9 +25,7 @@ ChartJS.register(
 
 const HourlyForecast = ({ hourlyData }) => {
   if (!hourlyData || !Array.isArray(hourlyData)) {
-    return (
-      <div className={css.noData}>No hourly data available for this city</div>
-    );
+    return <div className={css.noData}>No hourly data available for this city</div>;
   }
 
   const nextHours = hourlyData.slice(0, 8);
@@ -58,26 +56,25 @@ const HourlyForecast = ({ hourlyData }) => {
       legend: { display: false },
     },
     scales: {
+      x: {
+        ticks: {
+          maxRotation: 0,
+          autoSkip: true,
+          maxTicksLimit: 6
+        }
+      },
       y: {
         beginAtZero: false,
-        ticks: { callback: (value) => `${value}°C` },
+        ticks: { callback: (value) => `${value}°` },
       },
     },
   };
 
   return (
     <Container>
-    <div
-      style={{
-        height: "350px",
-        width: "100%",
-        padding: "20px",
-        background: "white",
-        borderRadius: "20px",
-      }}
-    >
-      <Line data={data} options={options} />
-    </div>
+      <div className={css.chartMainWrapper}>
+        <Line data={data} options={options} />
+      </div>
     </Container>
   );
 };

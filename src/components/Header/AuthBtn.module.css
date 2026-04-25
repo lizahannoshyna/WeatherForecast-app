@@ -37,7 +37,7 @@
   position: relative;
   color: #ffb422;
   background: transparent;
-  border: 2px solid transparent; 
+  border: 2px solid transparent;
   transition: all 0.3s ease;
   z-index: 1;
 }
@@ -50,7 +50,7 @@
   right: -2px;
   bottom: -2px;
   border-radius: 50px;
-  padding: 2px; 
+  padding: 2px;
   background: linear-gradient(135deg, #ffb422, #ff9a44);
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
