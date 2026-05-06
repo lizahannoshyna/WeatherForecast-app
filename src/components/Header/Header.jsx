@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import Container from "../Container";
 import AuthBtn from "./AuthBtn";
 import css from "./Header.module.css";
 import logo from "../../assets/img/logo.svg";
 import { PiUserCircleLight } from "react-icons/pi";
-import { HiMenuAlt3, HiX } from "react-icons/hi"; // Іконки для бургера
+import { HiMenuAlt3, HiX } from "react-icons/hi";
 
 const Header = () => {
   const { isSignIn, openModal, logout, user } = useAuth();
@@ -25,14 +26,12 @@ const Header = () => {
           <nav className={`${css.nav} ${isMenuOpen ? css.navOpen : ""}`}>
             <ul className={css.menuList}>
               <li className={css.menuItem}>
-                <a className={css.menuLink} href="#" onClick={closeMenu}>Who we are</a>
+                <Link className={css.menuLink} to="/" onClick={closeMenu}>Home</Link>
               </li>
               <li className={css.menuItem}>
-                <a className={css.menuLink} href="#" onClick={closeMenu}>Contacts</a>
-              </li>
+                <Link className={css.menuLink} to="/about" onClick={closeMenu}>Who we are</Link></li>
               <li className={css.menuItem}>
-                <a className={css.menuLink} href="#" onClick={closeMenu}>Menu</a>
-              </li>
+                <Link className={css.menuLink} to="/contacts" onClick={closeMenu}>Contacts</Link></li>
               <li className={css.mobileAuthItem}>
                 <AuthBtn
                   isLoggedIn={isSignIn}

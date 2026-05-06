@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme";
 import { getByCity } from "./services/weatherService";
@@ -18,6 +19,9 @@ import GallerySwiper from "./components/Gallery/GallerySwiper";
 import HourlyForecast from "./components/HourlyForecast/HourlyForecast";
 import WeeklyForecast from "./components/WeeklyForecast/WeeklyForecast";
 import Footer from "./components/Footer/Footer";
+import Contacts from "./pages/Contacts";
+import {WhoWeAre} from "./pages/WhoWeAre";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const [activeCity, setActiveCity] = useState(() => {
@@ -193,71 +197,81 @@ function App() {
 
       <Header onOpenAuth={openModal} />
 
-      <Hero onSearch={handleSearch} />
+      <Routes>
+        <Route path='/' element={
+          <>
+            <Hero onSearch={handleSearch} />
 
-      {loading && <div className="loader-overlay">⏳ Завантаження...</div>}
+            {loading && <div className="loader-overlay">⏳ Завантаження...</div>}
 
-      <WeatherForecast
-        weatherList={weatherList}
-        favorites={favorites}
-        onSeeMore={handleSeeMore}
-        onHourlyClick={handleForecastClick}
-        onDelete={handleDelete}
-        onFavorite={handleFavorite}
-        onRefresh={handleRefresh}
-      />
+            <WeatherForecast
+              weatherList={weatherList}
+              favorites={favorites}
+              onSeeMore={handleSeeMore}
+              onHourlyClick={handleForecastClick}
+              onDelete={handleDelete}
+              onFavorite={handleFavorite}
+              onRefresh={handleRefresh}
+            />
 
-      {selectedStats && (
-        <div className="container">
-          <div className="detail-section">
-            <h2 className="section-title">Stats for {selectedStats.name}</h2>
-            <WeatherForecastStats weatherData={selectedStats} />
-            <button
-              className="close-btn"
-              onClick={() => setSelectedStats(null)}
-              style={{ marginTop: "20px" }}
-            >
-              Close Stats
-            </button>
-          </div>
-        </div>
-      )}
+            {selectedStats && (
+              <div className="container">
+                <div className="detail-section">
+                  <h2 className="section-title">Stats for {selectedStats.name}</h2>
+                  <WeatherForecastStats weatherData={selectedStats} />
+                  <button
+                    className="close-btn"
+                    onClick={() => setSelectedStats(null)}
+                    style={{ marginTop: "20px" }}
+                  >
+                    Close Stats
+                  </button>
+                </div>
+              </div>
+            )}
 
-      <div className="container">
-        {selectedHourly && (
-          <div className="detail-section">
-            <h2 className="section-title">
-              Hourly Forecast for {selectedHourly.name}
-            </h2>
-            <HourlyForecast hourlyData={selectedHourly.list} />
-            <button
-              className="close-btn"
-              onClick={() => setSelectedHourly(null)}
-            >
-              Close
-            </button>
-          </div>
-        )}
+            <div className="container">
+              {selectedHourly && (
+                <div className="detail-section">
+                  <h2 className="section-title">
+                    Hourly Forecast for {selectedHourly.name}
+                  </h2>
+                  <HourlyForecast hourlyData={selectedHourly.list} />
+                  <button
+                    className="close-btn"
+                    onClick={() => setSelectedHourly(null)}
+                  >
+                    Close
+                  </button>
+                </div>
+              )}
 
-        {selectedWeekly && (
-          <div className="detail-section">
-            <h2 className="section-title">
-              Weekly Outlook for {selectedWeekly.name}
-            </h2>
-            <WeeklyForecast data={selectedWeekly.list} />
-            <button
-              className="close-btn"
-              onClick={() => setSelectedWeekly(null)}
-            >
-              Close
-            </button>
-          </div>
-        )}
-      </div>
+              {selectedWeekly && (
+                <div className="detail-section">
+                  <h2 className="section-title">
+                    Weekly Outlook for {selectedWeekly.name}
+                  </h2>
+                  <WeeklyForecast data={selectedWeekly.list} />
+                  <button
+                    className="close-btn"
+                    onClick={() => setSelectedWeekly(null)}
+                  >
+                    Close
+                  </button>
+                </div>
+              )}
+            </div>
 
-      <News city={activeCity} />
+            <News city={activeCity} />
 
-      <GallerySwiper photos={cityPhotos} />
+            <GallerySwiper photos={cityPhotos} />
+          </>
+        } />
+
+        <Route path="/about" element={<WhoWeAre />} />
+        <Route path="/contacts" element={<Contacts />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
 
       <Footer />
     </ThemeProvider>
